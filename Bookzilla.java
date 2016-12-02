@@ -2,6 +2,9 @@ package bookzilla;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -86,39 +89,116 @@ public class Bookzilla {
 	static long decode(long message){
 		return powmod(message, private_key, for_modulo);
 	}
-	static int create_username(String username, long password){
+	static JSONObject create_username(String username, long password){
+		JSONObject ret = new JSONObject();
 		try{
 			File file = new File("utilizatori//" + username);
 			if (!file.getParentFile().exists())
 				file.getParentFile().mkdirs();
-			if (file.exists())
-				return 1;
+			if (file.exists()){
+				ret.put("status","Username already taken");
+				return ret;
+			}
 			PrintWriter writer = new PrintWriter(file, "UTF-8");
 			writer.println(decode(password));
 			writer.close();
-			return 0;
+			ret.put("status",  "OK");
 		} catch (IOException e){
 			e.printStackTrace();
-			return 2;
+			ret.put("status",  "Unknown error");
 		}
+		return ret;
 	}
-	static int login(String username, long password){
+	static JSONObject login(String username, long password){
 		Scanner scanner;
+		JSONObject ret = new JSONObject();
 		try {
 			scanner = new Scanner(new File ("utilizatori//" + username));
 			long parola;
 			parola = scanner.nextLong();
-			int ret;
-			ret = (parola == decode(password))?0:1;
+			if (parola == decode(password))
+				ret.put("status", "OK");
+			else
+				ret.put("status", "Wrong Password");
 			scanner.close();
 			return ret;
 		} catch (FileNotFoundException e) {
-			return 2;
+			ret.put("status", "Username not found");
+			return ret;
 		}
 	}
-	static int introduce_book(String username, long password, String category, String city, String author, String title, String content){
-		int ret;
-		if ((ret = login(username, password)) != 0)
+	static JSONObject get_ratings(String username){
+		JSONObject ret = new JSONObject();
+		JSONObject current;
+		JSONArray list_users = new JSONArray();
+		int sum = 0, nr = 0, feedback = 0;
+		String user;
+		try {
+			Scanner scanner = new Scanner(new File("utilizatori//" + username));
+			scanner.nextLong();
+			while(scanner.hasNext()){
+				user = scanner.next();
+				if (!scanner.hasNextInt())
+					break;
+				feedback = scanner.nextInt();
+				sum += feedback;
+				nr++;
+				current = new JSONObject();
+				current.put("user", user);
+				current.put("feedback",  feedback);
+				list_users.add(current);
+			}
+			ret.put("lista", list_users);
+			ret.put("average", ((float)sum ) / nr);
+			ret.put("status",  "OK");
+		}catch (FileNotFoundException e){
+			ret.put("status",  "no such user");
+		}
+		return ret;
+	}
+	static JSONObject add_feedback(String user_leaving_feedback, long password, String user_receiving_feedback, int feedback){
+		JSONObject ret = new JSONObject();
+		ret = login(user_leaving_feedback, password);
+		if (!ret.get("status").equals("OK"))
+			return ret;
+		try {
+			long parola;
+			String user;
+			Integer user_feedback;
+			HashMap<String,Integer> feedbackuri = new HashMap();
+			Scanner scanner = new Scanner(new File("utilizatori//" + user_receiving_feedback));
+			parola = scanner.nextLong();
+			while (scanner.hasNext()){
+				user = scanner.next();
+				if (!scanner.hasNextInt())
+					break;
+				user_feedback = scanner.nextInt();
+				feedbackuri.put(user, user_feedback);
+			}
+			feedbackuri.put(user_leaving_feedback, feedback);
+			scanner.close();
+			File file = new File("utilizatori//" + user_receiving_feedback);
+			PrintWriter writer = new PrintWriter(file, "UTF-8");
+			writer.println(parola);
+			Iterator it = feedbackuri.entrySet().iterator();
+			Map.Entry f;
+			while (it.hasNext()){
+				f = (Map.Entry)it.next();
+				writer.println(f.getKey() + " " + f.getValue());
+			}
+			writer.close();
+		} catch (FileNotFoundException e){
+			ret.put("status", "user " + user_receiving_feedback + " not found");
+		} catch (Exception e){
+			ret.put("status", "Unknown error");
+		}
+		return ret;
+		
+	}
+	static JSONObject introduce_book(String username, long password, String category, String city, String author, String title, String content){
+		JSONObject ret;
+		ret = login(username, password);
+		if (!ret.get("status").equals("OK"))
 			return ret;
 		File file = new File("carti//" + category + "//" + city + "//" + author + "//" + username + "//" + title);
 		if (!file.getParentFile().exists()){
@@ -130,9 +210,9 @@ public class Bookzilla {
 			writer.close();
 		} catch(IOException e){
 			e.printStackTrace();
-			return 3;
+			ret.put("status", "error introducing book");
 		}
-		return 0;
+		return ret;
 	}
 	static class Books{
 		String category;
@@ -198,21 +278,43 @@ public class Bookzilla {
 		} catch (Exception e){
 			ret.put("lista", ret_list);
 			return ret;
-		}	
+		}
+	}
+	static JSONObject obtain_book_description(String category, String city, String author, String user, String title){
+		JSONObject ret = new JSONObject();
+		try {
+			File file = new File("carti//" + category + "//" + city + "//" + author + "//" + user + "//" + title);
+			String content = new Scanner(file).useDelimiter("\\Z").next();
+			ret.put("content", content);
+			ret.put("status", "OK");
+		} catch(Exception e){
+			ret.put("status", "File not Found");
+			ret.put("content", "");
+		}
+		return ret;
 	}
 	public static void main(String Args[]){
 		long tralala = get_public_key();
 		create_username("Utilizatorul1", code(12345));
 		create_username("Utilizatorul2", code(1111));
-		System.out.println(create_username("Utilizatorul1", 1532) + " inseamna ca utilizatorul exista deja");
-		System.out.println(login("Utilizatorul1", 12345) + " inseamna ca parola este gresita");
-		System.out.println(login("Utilizatorul1", code(12345)) + " s-a autentificat cu succes");
-		System.out.println(login("Inexistent", 153) + " inseamna utilizator inexistent");
+		create_username("Utilizatorul3", code(1));
+		create_username("Utilizatorul4", code(0));
+		System.out.println(create_username("Utilizatorul1", 1532));
+		System.out.println(login("Utilizatorul1", 12345));
+		System.out.println(login("Utilizatorul1", code(12345)));
+		System.out.println(login("Inexistent", 153));
 		introduce_book("Utilizatorul1", code(12345), "beletristica", "Arad", "autor colectiv", "arici pogonici", "In stare buna.");
 		introduce_book("Utilizatorul1", code(12345), "pt copii", "Alba", "Walt Disney", "Mickey Mouse", "lipsesc pagini");
 		introduce_book("Utilizatorul2", code(1111), "beletristica", "Arad", "Autor Colectiv", "arici pogonici", "toate cele 10 volume.");
 		System.out.println(get_books(null, null, null, "colectiv", null));
 		System.out.println(get_books("Utilizatorul1", "pt copii", "alba", "walt disney", "Mickey mOUSE"));
-		
+		System.out.println(obtain_book_description("1","2","3", "", ""));
+		System.out.println(obtain_book_description("beletristica", "Arad", "Autor Colectiv", "Utilizatorul2", "arici pogonici"));
+		System.out.println(add_feedback("Utilizatorul1", code(12345), "Utilizatorul4", 5));
+		System.out.println(add_feedback("Utilizatorul2", code(1111), "Utilizatorul1", 1));
+		System.out.println(add_feedback("Utilizatorul3", code(1), "Utilizatorul1", 5));
+		System.out.println(add_feedback("Utilizatorul4", code(0), "Utilizatorul1", 2));
+		System.out.println(get_ratings("Utilizatorul4"));
+		System.out.println(get_ratings("Utilizatorul1"));
 	}
 }
