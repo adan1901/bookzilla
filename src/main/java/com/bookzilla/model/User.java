@@ -36,6 +36,7 @@ public class User {
 
         super();
         this.rank = 0;
+        this.id = ++SEQUENCE_NUM;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

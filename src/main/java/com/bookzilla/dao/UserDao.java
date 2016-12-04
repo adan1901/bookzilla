@@ -41,7 +41,7 @@ public class UserDao implements BaseDao {
             if (file.exists()) { return true; }
 
             PrintWriter writer = new PrintWriter(file, "UTF-8");
-            writer.println(decode(Long.parseLong(user.getPassword(), 10)));
+            writer.println(user.getPassword());
             writer.close();
 
         } catch (IOException e){
