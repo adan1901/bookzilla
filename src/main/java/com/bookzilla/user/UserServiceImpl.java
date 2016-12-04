@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by adinu on 12/4/16.
@@ -26,5 +27,11 @@ public class UserServiceImpl extends UserService {
         if (user == null) { throw new UnsupportedOperationException(); }
 
         userDao.saveObject(user);
+    }
+
+    @Override
+    public List<User> listAllUsers() {
+        // TODO
+        return super.listAllUsers();
     }
 }

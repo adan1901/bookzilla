@@ -33,31 +33,39 @@ public class BookServiceImpl extends BookService {
 
     @Override
     public void addBookToUserLibrary(User user) {
+        //TODO
         super.addBookToUserLibrary(user);
     }
 
     @Override
     public void addBookToUserLibrary(int userId) {
+        //TODO
         super.addBookToUserLibrary(userId);
     }
 
     @Override
     public List<Book> findBooksWithHighestRank(int retBookLimit) {
+        //TODO
         return super.findBooksWithHighestRank(retBookLimit);
     }
 
     @Override
     public List<Book> retrieveBooksFromUserLibrary(User user) {
+        //TODO
         return super.retrieveBooksFromUserLibrary(user);
     }
 
     @Override
     public List<Book> retrieveBooksFromUserLibrary(int userId) {
+        //TODO
         return super.retrieveBooksFromUserLibrary(userId);
     }
 
     @Override
     public Book getBookWithId(int bookId) {
+
+        //TODO
+
         return super.getBookWithId(bookId);
     }
 }
