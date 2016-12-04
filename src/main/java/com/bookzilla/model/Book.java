@@ -48,6 +48,19 @@ public class Book {
         this.language = language;
     }
 
+    public Book(int id, String category, String location, String author, String publisher,
+                String title, String language, int ownerId, int renderId) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.renterId = renterId;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.category = category;
+        this.language = language;
+        this.location = location;
+    }
+
     public int getId() {
         return id;
     }

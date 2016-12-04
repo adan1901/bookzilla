@@ -6,6 +6,9 @@ import com.bookzilla.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import java.util.List;
 
@@ -67,5 +70,55 @@ public class BookServiceImpl extends BookService {
         //TODO
 
         return super.getBookWithId(bookId);
+    }
+
+    @Override
+    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){
+        if (to_seek.size() == 0){
+          ret.add(new Book(Integer.parseInt(till_now.get(0)), till_now.get(1), till_now.get(2),till_now.get(3), till_now.get(4),
+                  till_now.get(5), till_now.get(6), Integer.parseInt(till_now.get(7)), Integer.parseInt(till_now.get(8))));
+          return;
+      }
+      String criterion;
+      if (to_seek.get(0) != null){
+          criterion = new String(to_seek.get(0).toLowerCase());
+      }
+      else{
+          criterion = null;
+      }
+      to_seek.remove(0);
+      for (File dir_nou : dir.listFiles() ){
+          if (criterion == null || dir_nou.getName().toLowerCase().contains(criterion)){
+              till_now.add(dir_nou.getName());
+              seek_path(till_now, to_seek, ret, dir_nou);
+              till_now.remove(till_now.size() - 1);
+          }
+      }
+      to_seek.add(0, criterion);
+    }
+
+    @Override
+    public List<Book> findBooks(Integer id, Integer ownerId, Integer renterId, String title, String author, String publisher,
+                                String category, String language, String description, String location){
+        try{
+            File dir_mare = new File("books");
+            ArrayList<String> till_now = new ArrayList<String>();
+            ArrayList<String> to_seek = new ArrayList<String>();
+            to_seek.add(id.toString());
+            to_seek.add(category);
+            to_seek.add(location);
+            to_seek.add(author);
+            to_seek.add(publisher);
+            to_seek.add(title);
+            to_seek.add(language);
+            to_seek.add(ownerId.toString());
+            to_seek.add(renterId.toString());
+            ArrayList<Book> booklist = new ArrayList<Book>();
+            seek_path(till_now, to_seek, booklist, dir_mare);
+            return booklist;
+        } catch(Exception e){
+            e.printStackTrace();
+            return new ArrayList<Book>();
+        }
     }
 }

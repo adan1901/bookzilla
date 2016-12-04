@@ -5,6 +5,7 @@ import com.bookzilla.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 /**
  * Created by adinu on 12/4/16.
@@ -36,5 +37,10 @@ public abstract class BookService {
     }
 
     public Book getBookWithId(int bookId) { return new Book(); }
+
+    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){}
+
+    public List<Book> findBooks(Integer id, Integer ownerId, Integer renterId, String title, String author, String publisher,
+                                String category, String language, String description, String location) { return new ArrayList<Book>(); }
 
 }
