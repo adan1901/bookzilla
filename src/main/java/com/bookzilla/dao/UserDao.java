@@ -17,7 +17,7 @@ import static com.bookzilla.utils.PasswordEncryptor.decode;
 @Component
 public class UserDao implements BaseDao {
 
-    private Logger logger = Logger.getLogger("UserDao");
+    private static final Logger logger = Logger.getLogger(UserDao.class);
 
     @Override
     public boolean saveObject(Object object) {

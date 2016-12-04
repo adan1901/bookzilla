@@ -1,0 +1,232 @@
+body {
+    background-color: #267158;
+}
+
+#headdiv {
+    display:block;
+    height: 100px;
+}
+
+#centerdiv {
+    margin-top: 4%;
+}
+
+#footerdiv {
+    height:10%;
+}
+
+#leftcol {
+    margin-left: 10%;
+    width: 12%;
+
+    float: left;
+}
+
+#middlecol {
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 50%;
+    float: left;
+}
+
+#rightcol {
+    margin-right:10%;
+    width: 12%;
+    float: right;
+}
+
+#categorii {
+    height: 300px;
+    border-style: solid;
+    border-color: #003725;
+}
+
+#limba {
+    border-style: solid;
+    border-color: #003725;
+    height: 300px;
+}
+
+#judete {
+    height: 300px;
+    border-style: solid;
+    border-color: #003725;
+}
+
+#distanta {
+    border-style: solid;
+    border-color: #003725;
+    height: 300px;
+}
+
+#search {
+    height: 100px;
+}
+
+#titluPagina {
+
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 40px;
+}
+
+#user {
+    margin-right:10%;
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 16px;
+    float: left;
+    text-decoration: underline;
+}
+
+#labelUser{
+    width: 16%;
+    float:right;
+}
+
+#logout{
+    float: right;
+    background-color: #7ead9d;
+    border-color: #003725;
+    color: black;
+    margin-right: 4%;
+}
+
+#titluCategorii {
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 24px;
+}
+
+#titluRecomandari {
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: square;
+}
+ul li a {
+    text-decoration: none;
+    color: #003725;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+#searchbar {
+    width: 75%;
+    margin-left: 10%;
+    height: 36px;
+}
+
+#searchButton {
+    height: 42px;
+    position:relative;
+    padding:6px 15px;
+    left:-4px;
+    border:2px solid #003725;
+    background-color:#003725;
+    color:#7ead9d;
+}
+#searchButton:hover{
+    background-color:#7ead9d;
+    color:#003725;
+}
+
+
+#recLeft {
+    width: 29%;
+    margin-right:5%;
+    margin-top: 1%;
+    float: left;
+}
+
+#recMid {
+    width: 29%;
+    margin-right:5%;
+    margin-top: 1%;
+    float: left;
+}
+
+#recRight {
+    width: 30%;
+    margin-top: 1%;
+    float: right;
+}
+
+#recImg {
+    width:180px;
+}
+
+#rghtCol {
+    width: 25%;
+    float:left;
+    margin-top: 4%;
+}
+
+#lftCol {
+    width: 50%;
+    float: left;
+    margin-top: 4%;
+}
+
+#profilImg{
+    margin-left:50%;
+    border-style: solid;
+    border-color: #003725;
+}
+
+#colTop {
+    font-family: "Arial Black";
+    font-size: 16px;
+    border-style: solid;
+    border-color: #003725;
+}
+
+#colMid {
+
+}
+
+#colBot {
+    border-style: solid;
+    border-color: #003725;
+}
+
+#titluBiblioteca {
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+#numeCarte {
+    font-family: "Arial Black";
+    color: #7ead9d;
+    font-size: 24px;
+}
+
+hr {
+    width: 50%;
+}
+
+#colMid a {
+    text-decoration: none;
+    color: #003725;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#titluCarte{
+    display: block;
+    height: 100px;
+    margin-left: 45%;
+}
+
+#titluProfil {
+    display: block;
+    height: 100px;
+    margin-left: 45%;
+}

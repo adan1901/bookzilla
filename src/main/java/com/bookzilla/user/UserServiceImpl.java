@@ -15,7 +15,7 @@ import javax.inject.Inject;
 @Service
 public class UserServiceImpl extends UserService {
 
-    private Logger logger = Logger.getLogger("UserService");
+    private static final Logger logger = Logger.getLogger(UserService.class);
 
     @Autowired
     UserDao userDao;

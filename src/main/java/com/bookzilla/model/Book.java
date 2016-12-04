@@ -25,6 +25,10 @@ public class Book {
 
     private String language;
 
+    private String description;
+
+    private String location;
+
     public Book() {
 
         super();
@@ -116,6 +120,18 @@ public class Book {
         this.language = language;
     }
 
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 100007;
@@ -142,7 +158,7 @@ public class Book {
     @Override
     public String toString() {
         return String.format(
-                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, category=%s, language=%s]",
-                id, rank, title, author, publisher, category, language);
+                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, category=%s, language=%s, location=%s, description=%s]",
+                id, rank, title, author, publisher, category, language, location, description);
     }
 }
