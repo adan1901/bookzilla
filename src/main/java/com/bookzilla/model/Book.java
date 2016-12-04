@@ -59,6 +59,7 @@ public class Book {
         this.category = category;
         this.language = language;
         this.location = location;
+        this.description = new String("no description");
     }
 
     public int getId() {

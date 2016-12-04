@@ -104,15 +104,15 @@ public class BookServiceImpl extends BookService {
             File dir_mare = new File("books");
             ArrayList<String> till_now = new ArrayList<String>();
             ArrayList<String> to_seek = new ArrayList<String>();
-            to_seek.add(id.toString());
+            to_seek.add((id == null)?null:id.toString());
             to_seek.add(category);
             to_seek.add(location);
             to_seek.add(author);
             to_seek.add(publisher);
             to_seek.add(title);
             to_seek.add(language);
-            to_seek.add(ownerId.toString());
-            to_seek.add(renterId.toString());
+            to_seek.add((ownerId == null)?null:ownerId.toString());
+            to_seek.add((renterId == null)?null:renterId.toString());
             ArrayList<Book> booklist = new ArrayList<Book>();
             seek_path(till_now, to_seek, booklist, dir_mare);
             return booklist;
