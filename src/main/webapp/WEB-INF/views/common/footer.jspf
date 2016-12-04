@@ -1,0 +1,14 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: adinu
+  Date: 12/3/16
+  Time: 8:07 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script
+        src="webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
+
+</body>
+</html>

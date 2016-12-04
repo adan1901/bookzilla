@@ -1,0 +1,17 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: adinu
+  Date: 12/3/16
+  Time: 8:02 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<nav role="navigation" class="navbar navbar-default">
+
+    <div class="navbar-collapse">
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+</nav>

@@ -1,0 +1,84 @@
+/*---------------------------------*/
+.error {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+body{
+    background-color:#267158;
+}
+#titluAutentificare{
+    height: 100px;
+    margin-left: 37%;
+}
+
+#titluLogIn{
+    height: 100px;
+    margin-left: 45%;
+}
+
+#autentificare {
+    font-family: "Arial Black";
+    font-size: 40px;
+    color: #7ead9d;
+}
+
+#fields{
+    width: 30%;
+    margin-left: 35%;
+    margin-right:35%;
+    margin-top: 4%;
+}
+
+h3 {
+    width: 100px;
+    color: #7ead9d;
+    float: left;
+}
+
+input {
+    width: 300px;
+    float: right;
+}
+
+hr {
+    width: 50%;
+}
+
+
+#submit {
+    width: 24%;
+    margin-left: 38%;
+    margin-right:38%;
+}
+
+#butonSubmit{
+    width:100%;
+    margin-top:1%;
+    height: 50px;
+    background-color: #003725;
+    border-color: #003725;
+    cursor: pointer;
+    font-family: "Arial Black";
+    font-size: 15px;
+    color: #4c8e79;
+}
+
+a{
+    color: white;
+}
