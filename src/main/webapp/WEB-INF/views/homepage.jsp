@@ -134,8 +134,8 @@
             </div>
             <div id="recRight">
                 <center>
-                    <a href="<c:url value="/book-details/1"/>">
-                        <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
+                    <a href="<c:url value="/book-details/6"/>">
+                        <img src="https://s-media-cache-ak0.pinimg.com/236x/15/bd/d0/15bdd0091b241028f44bbbe3ce5f9d58.jpg" id="recImg"/>
                     </a>
                 </center>
             </div>
