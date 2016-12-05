@@ -32,22 +32,23 @@ public class UserServiceImpl extends UserService {
         userDao.saveObject(user);
     }
 
-
-    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<User> ret, File dir){
-        if (to_seek.size() == 0){
-            ret.add(new User(0, till_now.get(3), till_now.get(4), till_now.get(1), till_now.get(5), till_now.get(2), "no_location"));
+    private void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek,
+                          ArrayList<User> ret, File dir) {
+        if (to_seek.size() == 0) {
+            ret.add(new User(Integer.valueOf(till_now.get(0)), till_now.get(1), till_now.get(2),
+                    till_now.get(3), till_now.get(4), till_now.get(5)));
             return;
         }
         String criterion;
-        if (to_seek.get(0) != null){
+        if (to_seek.get(0) != null) {
             criterion = new String(to_seek.get(0).toLowerCase());
         }
-        else{
+        else {
             criterion = null;
         }
         to_seek.remove(0);
-        for (File dir_nou : dir.listFiles() ){
-            if (criterion == null || dir_nou.getName().toLowerCase().contains(criterion)){
+        for (File dir_nou : dir.listFiles() ) {
+            if (criterion == null || dir_nou.getName().toLowerCase().contains(criterion)) {
                 till_now.add(dir_nou.getName());
                 if (to_seek.size() == 0)
                     try {
@@ -57,9 +58,10 @@ public class UserServiceImpl extends UserService {
                         till_now.add(password);
                         scanner.close();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.debug(e);
+                        till_now.add("null");
                     }
-                seek_path(till_now, to_seek, ret, dir_nou);
+                seekPath(till_now, to_seek, ret, dir_nou);
                 if (to_seek.size() == 0)
                     till_now.remove(till_now.size() - 1);
                 till_now.remove(till_now.size() - 1);
@@ -69,7 +71,30 @@ public class UserServiceImpl extends UserService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+
+        try {
+            File dir_mare = new File("users");
+            ArrayList<String> till_now = new ArrayList<String>();
+            ArrayList<String> to_seek = new ArrayList<String>();
+            to_seek.add("");
+            to_seek.add(username);
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            ArrayList<User> userList = new ArrayList<User>();
+            seekPath(till_now, to_seek, userList, dir_mare);
+            return userList.get(0);
+
+        } catch (Exception e) {
+            logger.error(e);
+            return new User();
+        }
+    }
+
+    @Override
     public List<User> listAllUsers() {
+
         try {
             File dir_mare = new File("users");
             ArrayList<String> till_now = new ArrayList<String>();
@@ -79,34 +104,13 @@ public class UserServiceImpl extends UserService {
             to_seek.add("");
             to_seek.add("");
             to_seek.add("");
-            ArrayList<User> booklist = new ArrayList<User>();
-            seek_path(till_now, to_seek, booklist, dir_mare);
-            return booklist;
+            ArrayList<User> userList = new ArrayList<User>();
+            seekPath(till_now, to_seek, userList, dir_mare);
+            return userList;
+
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
             return new ArrayList<User>();
         }
     }
-
-        /*
-        ArrayList<User> ret = new ArrayList<User>();
-        Scanner scanner;
-        File dir_mare = new File("users");
-        String password;
-        try {
-            for (File 0 id : dir_mare.listFiles())
-                for (File 1 username : id.listFiles())
-                    for (File 2 email : username.listFiles())
-                        for (File 3 firstName : email.listFiles())
-                            for (File 4 lastName : firstName.listFiles()) {
-                                scanner = new Scanner(lastName);
-                                password = scanner.next();
-                                ret.add(new User(0, firstName.getName(), lastName.getName(), username.getName(), password, email.getName(), "no_location"));
-                            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        // TODO
-        return ret;
-    }*/
 }

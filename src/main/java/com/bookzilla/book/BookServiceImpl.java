@@ -23,7 +23,6 @@ public class BookServiceImpl extends BookService {
     @Autowired
     BookDao bookDao;
 
-
     @Override
     public void registerBook(Book book) throws Exception {
 

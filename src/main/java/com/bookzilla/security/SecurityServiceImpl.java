@@ -1,5 +1,6 @@
 package com.bookzilla.security;
 
+import com.bookzilla.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -22,6 +24,12 @@ import java.util.List;
 public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger logger = Logger.getLogger(SecurityServiceImpl.class);
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     public UserDetails findLoggedInUser() {
@@ -49,6 +57,20 @@ public class SecurityServiceImpl implements SecurityService {
                 authentication.getPrincipal(), authentication.getCredentials(), updatedAuthorities);
 
         SecurityContextHolder.getContext().setAuthentication(newAuth);
+    }
+
+    @Override
+    public void autoLogin(String username, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+
+        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            logger.debug(String.format("Auto login %s successfully!", username));
+        }
     }
 
     @Override

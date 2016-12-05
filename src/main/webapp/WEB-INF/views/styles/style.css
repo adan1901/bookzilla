@@ -27,6 +27,11 @@ body{
     margin-left: 37%;
 }
 
+#titluAdaugaCarte{
+    height: 100px;
+    margin-left: 40%;
+}
+
 #titluLogIn{
     height: 100px;
     margin-left: 45%;
@@ -60,7 +65,6 @@ hr {
     width: 50%;
 }
 
-
 #submit {
     width: 24%;
     margin-left: 38%;
@@ -68,6 +72,18 @@ hr {
 }
 
 #butonSubmit{
+    width:100%;
+    margin-top:1%;
+    height: 50px;
+    background-color: #003725;
+    border-color: #003725;
+    cursor: pointer;
+    font-family: "Arial Black";
+    font-size: 15px;
+    color: #4c8e79;
+}
+
+#butonAddCarte{
     width:100%;
     margin-top:1%;
     height: 50px;

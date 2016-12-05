@@ -45,6 +45,17 @@ public class User {
         this.location = location;
     }
 
+    public User(int id, String username, String email, String firstName, String lastName,
+                String password) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }

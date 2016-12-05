@@ -1,5 +1,6 @@
 package com.bookzilla.security;
 
+import com.bookzilla.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,5 +17,7 @@ public interface SecurityService {
     Authentication getAuthenticationContext();
 
     void updateUserRole(Authentication authentication, GrantedAuthority authority);
+
+    public void autoLogin(String username, String password);
 
 }

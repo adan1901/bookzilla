@@ -16,8 +16,12 @@ public abstract class UserService {
 
     public void addUser(User user) throws Exception {};
 
-    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<User> ret, File dir){}
-    //TODO
+    private void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<User> ret, File dir){}
+
+    public User findUserByUsername(String username) {
+        return null;
+    }
+
     public List<User> listAllUsers() {
         return new ArrayList<>();
     }

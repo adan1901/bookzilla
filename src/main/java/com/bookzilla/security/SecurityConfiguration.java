@@ -1,12 +1,16 @@
 package com.bookzilla.security;
 
 
+import com.bookzilla.model.User;
+import com.bookzilla.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import java.util.List;
 
 /**
  * Created by adinu on 12/3/16.
@@ -16,16 +20,27 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
+    AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    public void grantUser(User user) throws Exception {
+
+        authenticationManagerBuilder.inMemoryAuthentication().withUser(user.getUsername())
+                .password(user.getPassword()).roles("USER");
+    }
+
+    @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin")
-                .roles("USER", "ADMIN");
-        auth.inMemoryAuthentication().withUser("test").password("test")
-                .roles("USER");
-        auth.inMemoryAuthentication().withUser("test").password("1234")
-                .roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("1234")
-                .roles("USER");
+
+        List<User> registeredUsers = userService.listAllUsers();
+
+        for (User user : registeredUsers) {
+            auth.inMemoryAuthentication().withUser(user.getUsername())
+                    .password(user.getPassword()).roles("USER");
+        }
     }
 
     @Override

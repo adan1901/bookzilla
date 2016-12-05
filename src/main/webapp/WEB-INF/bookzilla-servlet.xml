@@ -34,5 +34,7 @@
 
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
 
+    <import resource="appconfig-security.xml"/>
+
 
 </beans>
