@@ -38,9 +38,12 @@ public abstract class BookService {
 
     public Book getBookWithId(int bookId) { return new Book(); }
 
-    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){}
+    public void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){}
 
     public List<Book> findBooks(Integer id, Integer ownerId, Integer renterId, String title, String author, String publisher,
-                                String category, String language, String description, String location) { return new ArrayList<Book>(); }
+                                String category, String language, String description, String location,
+                                String imgUrl) { return new ArrayList<Book>(); }
+
+    public List<Book> retrieveAllBooks() { return new ArrayList<Book>(); }
 
 }

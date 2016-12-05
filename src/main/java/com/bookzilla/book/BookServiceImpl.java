@@ -72,10 +72,11 @@ public class BookServiceImpl extends BookService {
     }
 
     @Override
-    public void seek_path(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){
+    public void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){
         if (to_seek.size() == 0){
           ret.add(new Book(Integer.parseInt(till_now.get(0)), till_now.get(1), till_now.get(2),till_now.get(3), till_now.get(4),
-                  till_now.get(5), till_now.get(6), Integer.parseInt(till_now.get(7)), Integer.parseInt(till_now.get(8))));
+                  till_now.get(5), till_now.get(6), Integer.parseInt(till_now.get(7)), Integer.parseInt(till_now.get(8)),
+                  till_now.get(9), till_now.get(10)));
           return;
       }
       String criterion;
@@ -89,7 +90,18 @@ public class BookServiceImpl extends BookService {
       for (File dir_nou : dir.listFiles() ){
           if (criterion == null || dir_nou.getName().toLowerCase().contains(criterion)){
               till_now.add(dir_nou.getName());
-              seek_path(till_now, to_seek, ret, dir_nou);
+              if (to_seek.size() == 0)
+                  try {
+                      String description;
+                      Scanner scanner = new Scanner(dir_nou);
+                      description = scanner.nextLine();
+                      till_now.add(description);
+                      scanner.close();
+                  } catch (Exception e) {
+                      logger.debug(e);
+                      till_now.add("null description");
+                  }
+              seekPath(till_now, to_seek, ret, dir_nou);
               till_now.remove(till_now.size() - 1);
           }
       }
@@ -98,7 +110,7 @@ public class BookServiceImpl extends BookService {
 
     @Override
     public List<Book> findBooks(Integer id, Integer ownerId, Integer renterId, String title, String author, String publisher,
-                                String category, String language, String description, String location){
+                                String category, String language, String description, String location, String imgUrl){
         try{
             File dir_mare = new File("books");
             ArrayList<String> till_now = new ArrayList<String>();
@@ -112,11 +124,39 @@ public class BookServiceImpl extends BookService {
             to_seek.add(language);
             to_seek.add((ownerId == null)?null:ownerId.toString());
             to_seek.add((renterId == null)?null:renterId.toString());
+            to_seek.add(imgUrl);
             ArrayList<Book> booklist = new ArrayList<Book>();
-            seek_path(till_now, to_seek, booklist, dir_mare);
+            seekPath(till_now, to_seek, booklist, dir_mare);
             return booklist;
         } catch(Exception e){
             e.printStackTrace();
+            return new ArrayList<Book>();
+        }
+    }
+
+    @Override
+    public List<Book> retrieveAllBooks() {
+
+        try {
+            File dir_mare = new File("books");
+            ArrayList<String> till_now = new ArrayList<String>();
+            ArrayList<String> to_seek = new ArrayList<String>();
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            to_seek.add("");
+            ArrayList<Book> bookList = new ArrayList<Book>();
+            seekPath(till_now, to_seek, bookList, dir_mare);
+            return bookList;
+
+        } catch (Exception e) {
+            logger.error(e);
             return new ArrayList<Book>();
         }
     }

@@ -16,7 +16,8 @@
     </div>
     <br />
     <div id="labelUser">
-        <label id="user">${name}</label>
+
+        <label id="user" onclick="location.href='/user-details';">${name}</label>
 
         <input type="button" id="logout" onclick="location.href='/logout';" value="Log Out" />
 
@@ -105,7 +106,9 @@
             <br />
             <div id="recLeft">
                 <center>
-                    <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
+                    <%--<a href="<c:url value="/book-details/1"/>">--%>
+                        <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
+                    <%--</a>--%>
                 </center>
             </div>
             <div id="recMid">
@@ -131,7 +134,9 @@
             </div>
             <div id="recRight">
                 <center>
-                    <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
+                    <a href="<c:url value="/book-details/1"/>">
+                        <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
+                    </a>
                 </center>
             </div>
         </div>

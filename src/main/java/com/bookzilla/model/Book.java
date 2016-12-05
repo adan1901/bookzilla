@@ -29,14 +29,17 @@ public class Book {
 
     private String location;
 
+    private String urlLocation;
+
     public Book() {
 
         super();
         this.id = Book.SEQUENCE_NUM++;
     }
 
-    public Book(int ownerId, double rank, String title, String author, String publisher, String category,
-                String language) {
+    public Book(String category, String location, String author, String publisher,
+                String title, String language, int ownerId, int renderId, String urlLocation,
+                String description, int rank) {
 
         super();
         this.id = ++Book.SEQUENCE_NUM;
@@ -46,10 +49,12 @@ public class Book {
         this.publisher = publisher;
         this.category = category;
         this.language = language;
+        this.urlLocation = urlLocation;
+        this.description = description;
     }
 
     public Book(int id, String category, String location, String author, String publisher,
-                String title, String language, int ownerId, int renderId) {
+                String title, String language, int ownerId, int renderId, String urlLocation, String description) {
         this.id = id;
         this.ownerId = ownerId;
         this.renterId = renterId;
@@ -59,7 +64,8 @@ public class Book {
         this.category = category;
         this.language = language;
         this.location = location;
-        this.description = new String("no description");
+        this.description = description;
+        this.urlLocation = urlLocation;
     }
 
     public int getId() {
@@ -144,6 +150,14 @@ public class Book {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getUrlLocation() {
+        return urlLocation;
+    }
+
+    public void setUrlLocation(String urlLocation) {
+        this.urlLocation = urlLocation;
     }
 
     @Override

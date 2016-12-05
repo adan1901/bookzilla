@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="logo">
-    <img src="/images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/>
+    <a href="<c:url value="/"/>"><img src="/images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
 </div>
 <div id="titluAdaugaCarte">
     <label id="autentificare">

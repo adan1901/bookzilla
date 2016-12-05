@@ -33,7 +33,7 @@ public class BookDao implements BaseDao {
         File file = new File("books//" + book.getId() + "//" + book.getCategory()+ "//" +
                 book.getLocation()+ "//" + book.getAuthor() + "//" + book.getPublisher() + "//" +
                 book.getTitle() + "//" + book.getLanguage() + "//" + book.getOwnerId() + "//" +
-                book.getRenterId());
+                book.getRenterId() + "//" + book.getUrlLocation());
         if (!file.getParentFile().exists()){
             file.getParentFile().mkdirs();
         }
