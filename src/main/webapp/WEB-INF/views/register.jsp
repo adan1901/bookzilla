@@ -35,6 +35,10 @@
             <input id="username" type="text" name="username"/>
             <br/><br/>
 
+            <label id="tel" style="float:left; font-size:20px">Telefon</label>
+            <input id="telefon" type="text" name="telefon">
+            <br/><br/>
+
             <label id="parola" style="float:left; font-size:20px">Parola</label>
             <input id="password" type="password" name="password"/>
             <br/><br/>
