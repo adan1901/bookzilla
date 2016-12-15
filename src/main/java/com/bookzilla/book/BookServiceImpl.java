@@ -203,4 +203,36 @@ public class BookServiceImpl extends BookService {
 
         return findBooks(null, null, null, null, null, null, null, null, null, null, null);
     }
+
+    @Override
+    public int getNextSequenceNum() {
+        int seq_num = Book.SEQUENCE_NUM;
+
+        try {
+            File user_seq = new File("book_sequence");
+            Scanner scanner = new Scanner(user_seq);
+            seq_num = Integer.parseInt(scanner.next());
+            scanner.close();
+
+            return ++seq_num;
+        } catch (Exception e) {
+            logger.error(e);
+            return ++seq_num;
+        }
+    }
+
+    @Override
+    public void saveSequenceNum(int sequenceNum) {
+
+        try {
+            File file = new File("book_sequence");
+
+            PrintWriter writer = new PrintWriter(file, "UTF-8");
+            writer.println(sequenceNum);
+            writer.close();
+
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
 }

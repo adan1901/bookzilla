@@ -1,7 +1,9 @@
 package com.bookzilla.dao;
 
 import com.bookzilla.model.User;
+import com.bookzilla.user.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,6 +20,9 @@ import static com.bookzilla.utils.PasswordEncryptor.decode;
 public class UserDao implements BaseDao {
 
     private static final Logger logger = Logger.getLogger(UserDao.class);
+
+    @Autowired
+    UserService userService;
 
     @Override
     public boolean saveObject(Object object) {
@@ -43,6 +48,8 @@ public class UserDao implements BaseDao {
             PrintWriter writer = new PrintWriter(file, "UTF-8");
             writer.println(user.getPassword());
             writer.close();
+
+            userService.saveSequenceNum(user.getId());
 
         } catch (IOException e){
             logger.error(e);

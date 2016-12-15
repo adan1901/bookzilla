@@ -5,7 +5,7 @@ package com.bookzilla.model;
  */
 public class Book {
 
-    private static int SEQUENCE_NUM = 0;
+    public static int SEQUENCE_NUM = 0;
 
     private int id;
 

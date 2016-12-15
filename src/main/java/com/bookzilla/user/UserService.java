@@ -26,4 +26,8 @@ public abstract class UserService {
         return new ArrayList<>();
     }
 
+    public int getNextSequenceNum() { return 0; };
+
+    public void saveSequenceNum(int sequence_num) {};
+
 }

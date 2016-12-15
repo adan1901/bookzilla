@@ -50,4 +50,8 @@ public abstract class BookService {
 
     public String unescapeBuggySymbols(String s) { return null; }
 
+    public int getNextSequenceNum() { return 0; };
+
+    public void saveSequenceNum(int sequence_num) {};
+
 }

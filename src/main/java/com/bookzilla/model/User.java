@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class User {
 
-    private static int SEQUENCE_NUM = 0;
+    public static int SEQUENCE_NUM = 0;
 
     private int id;
 

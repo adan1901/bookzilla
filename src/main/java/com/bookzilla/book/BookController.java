@@ -53,6 +53,8 @@ public class BookController {
         User user = userService.findUserByUsername(username);
 
         String urlLocation = bookService.escapeBuggySymbols(bookCoverUrl);
+        Book.SEQUENCE_NUM = bookService.getNextSequenceNum() - 1;
+
         Book book = new Book(bookCateg, "Bucuresti", bookAuthor, bookPublisher, bookTitle,
                 bookLanguage, user.getId(), -1, urlLocation, "no description", 0);
 

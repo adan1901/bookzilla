@@ -1,7 +1,9 @@
 package com.bookzilla.dao;
 
+import com.bookzilla.book.BookService;
 import com.bookzilla.model.Book;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -15,6 +17,9 @@ import java.io.IOException;
 public class BookDao implements BaseDao {
 
     private static final Logger logger = Logger.getLogger(BookDao.class);
+
+    @Autowired
+    BookService bookService;
 
     @Override
     public boolean saveObject(Object object) {
@@ -43,6 +48,8 @@ public class BookDao implements BaseDao {
             FileWriter writer = new FileWriter(file);
             writer.write(book.getDescription());
             writer.close();
+
+            bookService.saveSequenceNum(book.getId());
 
         } catch(IOException e){
             logger.debug(e);
