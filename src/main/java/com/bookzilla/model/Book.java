@@ -41,16 +41,19 @@ public class Book {
                 String title, String language, int ownerId, int renderId, String urlLocation,
                 String description, int rank) {
 
-        super();
+        System.out.println("Hello from first constructor of Book");
         this.id = ++Book.SEQUENCE_NUM;
-        this.ownerId = ownerId;
-        this.rank = rank;
+        this.category = category;
+        this.location = location;
         this.author = author;
         this.publisher = publisher;
-        this.category = category;
+        this.title = title;
         this.language = language;
+        this.ownerId = ownerId;
+        this.renterId = renderId;
         this.urlLocation = urlLocation;
         this.description = description;
+        this.rank = rank;
     }
 
     public Book(int id, String category, String location, String author, String publisher,
@@ -186,7 +189,7 @@ public class Book {
     @Override
     public String toString() {
         return String.format(
-                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, category=%s, language=%s, location=%s, description=%s]",
-                id, rank, title, author, publisher, category, language, location, description);
+                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, category=%s, language=%s, location=%s, description=%s, urlLocation=%s]",
+                id, rank, title, author, publisher, category, language, location, description, urlLocation);
     }
 }

@@ -33,6 +33,65 @@ public class BookServiceImpl extends BookService {
         bookDao.saveObject(book);
     }
 
+    public String escapeBuggySymbols(String s) {
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s.charAt(i) == '.') {
+                sb.append(" ");
+                continue;
+            } else if (s.charAt(i) == ':') {
+                sb.append("  ");
+                continue;
+            } else if (s.charAt(i) == '/') {
+                sb.append("   ");
+                continue;
+            }
+
+            sb.append(s.charAt(i));
+        }
+
+        return sb.toString();
+    }
+
+    public String unescapeBuggySymbols(String s) {
+
+        logger.debug(".unescapeBuggySymbols " + "s: " + s);
+
+        StringBuilder sb = new StringBuilder();
+
+        char space = ' ';
+        int spacesNum, offset;
+        for (int i = 0; i < s.length(); i++) {
+            spacesNum = 0;
+            offset = i;
+            while ( (s.charAt(offset) == space) && (offset < s.length()) ) {
+                offset++;
+                spacesNum++;
+            }
+            if (spacesNum == 8) {
+                sb.append("://");
+                i = offset - 1;
+                continue;
+            } else if (spacesNum == 1) {
+                sb.append(".");
+                i = offset - 1;
+                continue;
+            } else if (spacesNum == 3) {
+                sb.append("/");
+                i = offset - 1;
+                continue;
+            }
+
+            logger.debug("appending char " + s.charAt(i));
+            sb.append(s.charAt(i));
+        }
+        logger.debug(".unescapeBuggySymbols " + " after unescape: " + sb.toString());
+
+        return sb.toString();
+    }
+
     @Override
     public void addBookToUserLibrary(User user) {
         //TODO
@@ -59,25 +118,21 @@ public class BookServiceImpl extends BookService {
 
     @Override
     public List<Book> retrieveBooksFromUserLibrary(int userId) {
-        //TODO
-        return super.retrieveBooksFromUserLibrary(userId);
+        return findBooks(null, userId, null, null, null, null, null, null, null, null, null);
     }
 
     @Override
     public Book getBookWithId(int bookId) {
-
-        //TODO
-
-        return super.getBookWithId(bookId);
+        return findBooks(bookId, null, null, null, null, null, null, null, null, null, null).get(0);
     }
 
     @Override
     public void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<Book> ret, File dir){
-        if (to_seek.size() == 0){
-          ret.add(new Book(Integer.parseInt(till_now.get(0)), till_now.get(1), till_now.get(2),till_now.get(3), till_now.get(4),
-                  till_now.get(5), till_now.get(6), Integer.parseInt(till_now.get(7)), Integer.parseInt(till_now.get(8)),
-                  till_now.get(9), till_now.get(10)));
-          return;
+        if (to_seek.size() == 0) {
+            ret.add(new Book(Integer.parseInt(till_now.get(0)), till_now.get(1), till_now.get(2),till_now.get(3), till_now.get(4),
+              till_now.get(5), till_now.get(6), Integer.parseInt(till_now.get(7)), Integer.parseInt(till_now.get(8)),
+              till_now.get(9), till_now.get(10)));
+            return;
       }
       String criterion;
       if (to_seek.get(0) != null){
@@ -102,6 +157,8 @@ public class BookServiceImpl extends BookService {
                       till_now.add("null description");
                   }
               seekPath(till_now, to_seek, ret, dir_nou);
+              if (to_seek.size() == 0)
+                  till_now.remove(till_now.size() - 1);
               till_now.remove(till_now.size() - 1);
           }
       }
@@ -125,9 +182,16 @@ public class BookServiceImpl extends BookService {
             to_seek.add((ownerId == null)?null:ownerId.toString());
             to_seek.add((renterId == null)?null:renterId.toString());
             to_seek.add(imgUrl);
-            ArrayList<Book> booklist = new ArrayList<Book>();
-            seekPath(till_now, to_seek, booklist, dir_mare);
-            return booklist;
+            ArrayList<Book> bookList = new ArrayList<Book>();
+
+            seekPath(till_now, to_seek, bookList, dir_mare);
+
+            logger.debug("Search returned " + bookList.size() + " results.");
+
+            for (Book b : bookList) {
+                b.setUrlLocation(unescapeBuggySymbols(b.getUrlLocation()));
+            }
+            return bookList;
         } catch(Exception e){
             e.printStackTrace();
             return new ArrayList<Book>();
@@ -137,27 +201,6 @@ public class BookServiceImpl extends BookService {
     @Override
     public List<Book> retrieveAllBooks() {
 
-        try {
-            File dir_mare = new File("books");
-            ArrayList<String> till_now = new ArrayList<String>();
-            ArrayList<String> to_seek = new ArrayList<String>();
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            to_seek.add("");
-            ArrayList<Book> bookList = new ArrayList<Book>();
-            seekPath(till_now, to_seek, bookList, dir_mare);
-            return bookList;
-
-        } catch (Exception e) {
-            logger.error(e);
-            return new ArrayList<Book>();
-        }
+        return findBooks(null, null, null, null, null, null, null, null, null, null, null);
     }
 }

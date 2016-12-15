@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>ADAUGA CARTE</title>
-    <style> <%@include file="styles/style.css" %> </style>
+    <style> <%@include file="../../resources/css/style.css" %> </style>
 
 </head>
 <body>

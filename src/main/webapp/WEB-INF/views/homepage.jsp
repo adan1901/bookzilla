@@ -6,7 +6,7 @@
     <!--script src="main.js"></script-->
     <title>BOOKZILLA</title>
 
-    <style> <%@include file="styles/styles.css" %> </style>
+    <style> <%@include file="/resources/css/styles.css" %> </style>
 
 </head>
 <body>

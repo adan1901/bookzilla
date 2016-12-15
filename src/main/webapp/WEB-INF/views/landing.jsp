@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Raluca
@@ -6,26 +8,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@page session="true"%>
 <html lang="en">
 <head>
-
-    <style>
-        <%@include file="styles/styles.css" %>
-        <%@include file="clock_assets/flipclock.css" %>
-
-    </style>
-
 
     <title>BOOKZILLA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
-
+    <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />"/>
+    <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />"></script>
+    <script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" />"></script>
+    <style>
+        <%@include file="/resources/css/styles.css" %>
+        <%@include file="/resources/js/clock_assets/flipclock.css" %>
+    </style>
+    <link rel="stylesheet" type="text/css" href="<c:url value="http://fonts.googleapis.com/css?family=Arvo" />">
 
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
@@ -69,19 +66,21 @@
             <a class="navbar-brand" href="#">Logo</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
+            <spring:url value="/" var="urlLanding" htmlEscape="true"/>
+            <spring:url value="/library" var="urlLibrary" htmlEscape="true"/>
+            <spring:url value="/login" var="urlLogin" htmlEscape="true"/>
+            <c:set var="isUserLoggedIn" value="${(empty loggedIn) ? 'false' : loggedIn}" />
             <ul class="nav navbar-nav" id="meniu-top">
-                <li class="active"><a href="landing.html">Home</a></li>
-                <li><a href="index.html">Bibliotec&#259;</a></li>
+                <li class="active"><a href="${urlLanding}">Home</a></li>
+                <li><a href="${urlLibrary}">Bibliotec&#259;</a></li>
                 <li><a href="#">Despre noi</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="${urlLogin}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
 
         </div>
     </div>
 </nav>
-
-
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -157,7 +156,7 @@
 <div id="about-us">
     <div class="container text-center">
         <br />
-        <div id="titlu-about">Ce face BOOKZILLA?</div><br />
+        <div id="titlu-about">Ce înseamnă BOOKZILLA?</div><br />
         <div class="row">
 		<span class="col-sm-4" id="wrapper">
 		  <img src="/images/a1.jpg" class="img-responsive hover" style="width:100%" alt="Image">
@@ -195,8 +194,8 @@
         </div>
         <div class="col-sm-6">
             <center><div class="clock-builder-output"></div></center>
-            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-            <script type="text/javascript" src="clock_assets/flipclock.js"></script>
+            <script type="text/javascript" src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />"></script>
+            <script type="text/javascript" src="<c:url value="/resources/js/clock_assets/flipclock.js" />"></script>
             <style text="text/css">body .flip-clock-wrapper ul li a div div.inn, body .flip-clock-small-wrapper ul li a div div.inn { color: #CCCCCC; background-color: #333333; } body .flip-clock-dot, body .flip-clock-small-wrapper .flip-clock-dot { background: #323434; } body .flip-clock-wrapper .flip-clock-meridium a, body .flip-clock-small-wrapper .flip-clock-meridium a { color: #323434; }</style>
             <script type="text/javascript">
                 $(function(){
@@ -282,7 +281,7 @@
 </div>
 
 <footer class="container-fluid text-center" id="footer-landing">
-    <p>&copy;BOOKZILLA</p>
+    <p>&copy;Bookzilla 2016</p>
 </footer>
 
 </body>

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Raluca
@@ -6,24 +8,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
-
-    <style>
-        <%@include file="styles/styles.css"%>
-    </style>
-
-    <link rel="stylesheet" href="styles.css">
     <!--script src="main.js"></script-->
     <title>BOOKZILLA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
+    <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />"/>
+    <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />"></script>
+    <script src="<c:url value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" />"></script>
+    <style>
+        <%@include file="/resources/css/styles.css"%>
+        <%@include file="/resources/js/clock_assets/flipclock.css" %>
+    </style>
+    <link rel="stylesheet" type="text/css" href="<c:url value="http://fonts.googleapis.com/css?family=Arvo" />">
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -104,15 +104,16 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav" id="meniu-top">
-                <li><a href="landing.html">Home</a></li>
-                <li class="active"><a href="index.html">Bibliotec&#259;</a></li>
+                <spring:url value="/" var="urlLanding" htmlEscape="true"/>
+                <li><a href="${urlLanding}">Home</a></li>
+                <li class="active"><a href="#">Bibliotec&#259;</a></li>
                 <li><a href="#">Despre noi</a></li>
                 <li><a href="#">Contact</a></li>
                 <li class="dropdown" id="user">
-                    <a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">Nume Prenume</a>
+                    <a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">${firstname} ${lastname}</a>
                     <div class="dropdown-content" id="myDropdown">
-                        <a href="profil.html" id="profil-btn">Profil</a>
-                        <a href="landing.html" id="logout-btn">Log out</a>
+                        <a href="/user-details/show-profile" id="profil-btn">Profil</a>
+                        <a href="/logout" id="logout-btn">Log out</a>
                     </div>
                 </li>
             </ul>
@@ -126,11 +127,13 @@
     <center><p id="titluPagina-desc">Caut&#259; in biblioteca noastr&#259;...</p></center>
     <br />
 
+    <form name='searchForm'
+          action="<c:url value='/library/search' />" method='POST'>
     <div class="container" id="search">
         <div class="row">
             <div class="col-md-12">
                 <div class="input-group" id="adv-search">
-                    <input type="text" class="form-control" placeholder="Caut&#259; dup&#259; titlu sau autor..." />
+                    <input type="text" name="search_key" class="form-control" placeholder="Caut&#259; dup&#259; titlu sau autor..." />
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
@@ -166,6 +169,7 @@
             </div>
         </div>
     </div>
+    </form>
 </div>
 
 <div class="col-md-3" id="meniu-stanga">
@@ -402,25 +406,42 @@
     </div>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
-            </div>
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
 
-            </div>
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
-            </div>
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
-            </div>
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
-            </div>
-            <div class="col-md-2">
-                <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>
-            </div>
+            <c:forEach items="${allBooks}" var="book">
+                <a href="<c:url value="/book-details/${book.id}" />">
+                    <div class="col-md-2">
+                        <img src="<c:url value="${book.urlLocation}" /> " id="recImg"/>
+                    </div>
+                </a>
+            </c:forEach>
+
+            <c:forEach items="${matchedBooks}" var="matchedBook">
+                <a href="<c:url value="/book-details/${matchedBook.id}" />">
+                    <div class="col-md-2">
+                        <img src="<c:url value="${matchedBook.urlLocation}" /> " id="recImg"/>
+                    </div>
+                </a>
+            </c:forEach>
+
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+            <%--</div>--%>
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+
+            <%--</div>--%>
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+            <%--</div>--%>
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+            <%--</div>--%>
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+            <%--</div>--%>
+            <%--<div class="col-md-2">--%>
+                <%--<img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSVT0-lKGM7s7ZbVv8iQb0J2VogGEBefu1uyduxA-Awc6I9ANKQ" id="recImg"/>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>

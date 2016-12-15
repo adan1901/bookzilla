@@ -11,8 +11,9 @@
         <csrf disabled="true"></csrf>
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/register" access="permitAll"/>
+        <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/*" access="hasRole('USER')"/>
-        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <form-login login-page="/login" default-target-url="/library" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
     </http>
 

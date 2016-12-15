@@ -67,6 +67,6 @@ public class RegisterController {
             logger.error(e);
         }
 
-        return "redirect:/";
+        return "redirect:/library";
     }
 }

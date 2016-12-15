@@ -243,7 +243,7 @@ hr {
 }
 
 #timer-line{
-    background-image: URL('img/triangles.jpg');
+    background-image: URL('/images/triangles.jpg');
 }
 
 #clockdiv{
@@ -297,7 +297,7 @@ hr {
 
 
 #about-us {
-    background-image: url("img/aboutus2.jpg");
+    background-image: url("/images/aboutus2.jpg");
 }
 
 #timer-text {
@@ -320,7 +320,7 @@ hr {
 
 
 #contact-line {
-    background-image: url("img/contactbc.jpg");
+    background-image: url("/images/contactbc.jpg");
 }
 
 #contact-text-sec {
@@ -349,7 +349,7 @@ hr {
 #footer-landing {
     height: 80px;
     width:100%;
-    background-image: url("img/footer.jpg");
+    background-image: url("/images/footer.jpg");
     color:white;
     font-size:20px;
 }
@@ -357,14 +357,14 @@ hr {
 #footer-biblioteca {
     height: 80px;
     width:100%;
-    background-image: url("img/footer.jpg");
+    background-image: url("/images/footer.jpg");
     color:white;
     font-size:20px;
 }
 
 #header-biblioteca {
 
-    background-image: url("img/header-biblioteca.jpg");
+    background-image: url("/images/header-biblioteca.jpg");
     height: 460px;
     border-style: solid;
     border-bottom: thin solid white;
@@ -467,15 +467,15 @@ hr {
     margin-right: 0;
     margin-left: 0;
 }
-/* 
+/*
     Sometimes the sub menus get too large for the page and prevent the menu from scrolling, limiting functionality
-    A quick fix is to change .side-menu to 
+    A quick fix is to change .side-menu to
 
     -> position:absolute
-    
+
     and uncomment the code below.
-    You also need to uncomment 
-    
+    You also need to uncomment
+
     -> <div class="absolute-wrapper"> </div> in the html file
 
     you also need to tweek the animation. Just uncomment the code in that section

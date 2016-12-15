@@ -29,7 +29,7 @@ public abstract class BookService {
     }
 
     public List<Book> retrieveBooksFromUserLibrary(User user) {
-        return new ArrayList<>();
+        return retrieveBooksFromUserLibrary(user.getId());
     }
 
     public List<Book> retrieveBooksFromUserLibrary(int userId) {
@@ -45,5 +45,9 @@ public abstract class BookService {
                                 String imgUrl) { return new ArrayList<Book>(); }
 
     public List<Book> retrieveAllBooks() { return new ArrayList<Book>(); }
+
+    public String escapeBuggySymbols(String s) { return null; }
+
+    public String unescapeBuggySymbols(String s) { return null; }
 
 }

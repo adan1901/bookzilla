@@ -5,7 +5,7 @@
 <head>
     <!--script src="main.js"></script-->
     <title>BOOKZILLA</title>
-    <style> <%@include file="styles/styles.css" %> </style>
+    <style> <%@include file="/resources/css/styles.css" %> </style>
 
 </head>
 <body>
@@ -13,7 +13,7 @@
     <a href="<c:url value="/"/>"><img src="/images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
 </div>
 <div id="labelUser">
-    <label id="user">${name}</label>
+    <%--<label id="user">${name}</label>--%>
     <input type="button" id="logout" onclick="location.href='/logout';" value="Log Out" />
 </div>
 <div id="titluProfil">
@@ -38,13 +38,15 @@
     <div id="colMid">
         <label id="titluBiblioteca">BIBLIOTECA PERSONALA</label>
         <br />
-        <a href="#">
-            <img src="https://ae01.alicdn.com/kf/HTB12T9XKVXXXXcGaXXXq6xXFXXXU/New-Needlework-font-b-Glasses-b-font-font-b-Cat-b-font-Lying-On-The-Sofa.jpg" style="margin-left:10px;width:180px;height:200px;float:left;margin-top:10px;" />
-        </a>
-        <a href="#">
-            <img src="https://ae01.alicdn.com/kf/HTB12T9XKVXXXXcGaXXXq6xXFXXXU/New-Needlework-font-b-Glasses-b-font-font-b-Cat-b-font-Lying-On-The-Sofa.jpg" style="width:180px;height:200px;float:right;margin-top:10px;" />
-        </a>
-        <a href="<c:url value="/add-book"/>"><button type="button" id="addBook">Adauga o carte</button></a>
+        <c:forEach items="${bookCollection}" var="book">
+            <a href="/book-details/${book.id}">
+                <img src="${book.urlLocation}" style="margin-left:10px;width:180px;height:200px;float:left;margin-top:10px;" />
+            </a>
+        </c:forEach>
+
+        <c:if test="${userIsPriviliged}">
+            <a href="<c:url value="/add-book"/>"><button type="button" id="addBook">Adauga o carte</button></a>
+        </c:if>
     </div>
 
 </div>

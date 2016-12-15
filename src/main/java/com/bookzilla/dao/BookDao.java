@@ -34,6 +34,8 @@ public class BookDao implements BaseDao {
                 book.getLocation()+ "//" + book.getAuthor() + "//" + book.getPublisher() + "//" +
                 book.getTitle() + "//" + book.getLanguage() + "//" + book.getOwnerId() + "//" +
                 book.getRenterId() + "//" + book.getUrlLocation());
+
+        logger.debug("Writing to disk file ierarchy: " + file.getName());
         if (!file.getParentFile().exists()){
             file.getParentFile().mkdirs();
         }

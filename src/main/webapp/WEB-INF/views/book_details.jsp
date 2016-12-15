@@ -5,7 +5,7 @@
 <head>
     <!--script src="main.js"></script-->
     <title>BOOKZILLA</title>
-    <style> <%@include file="styles/styles.css" %> </style>
+    <style> <%@include file="../../resources/css/styles.css" %> </style>
 
 </head>
 <body>
@@ -14,7 +14,7 @@
     <a href="<c:url value="/"/>"><img src="/images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
 </div>
 <div id="labelUser">
-    <label id="user">${name}</label>
+    <label id="user">${firstName} ${lastName}</label>
     <input type="button" id="logout" onclick="location.href='/logout';" value="Log Out" />
 </div>
 <div id="titluCarte">
@@ -23,30 +23,29 @@
 </div>
 <hr/>
 <div id="lftCol">
-    <img id="profilImg" src="https://s-media-cache-ak0.pinimg.com/236x/15/bd/d0/15bdd0091b241028f44bbbe3ce5f9d58.jpg" style="width:240px;height:360px" />
+    <img id="profilImg" src="<c:url value="${bookImgUrl}" />" style="width:240px;height:360px" />
 </div>
 <div id="rghtCol">
     <div id="colTop">
-        Titlu: <label id="nume">Training your cat...</label>
+        Titlu: <label id="nume">${bookTitle}</label>
         <br />
-        Autor: <label id="prenume">Ethel Evans</label>
+        Autor: <label id="prenume">${bookAuthor}</label>
         <br />
-        Editura: <label id="telefon">RA</label>
+        Editura: <label id="telefon">${bookPublisher}</label>
         <br />
-        Categorie: <label id="telefon">SCI-FI</label>
+        Categorie: <label id="telefon">${bookCategory}</label>
         <br />
     </div>
     <br />
     <div id="colMid">
         <label id="titluBiblioteca">Cine are aceasta carte?</label>
         <br />
-        <a href="#">
-            X-ulecu Jr
-        </a>
-        <br />
-        <a href="#">
-            X-ulescu Ionescu
-        </a>
+        <c:forEach items="${usersHavingTheBook}" var="userWithBook">
+            <a href="/user-details/show-profile?username=${userWithBook.username}">
+                ${userWithBook.firstName} ${userWithBook.lastName}
+            </a>
+            <br/>
+        </c:forEach>
     </div>
 
 </div>

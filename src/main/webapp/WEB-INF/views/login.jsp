@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>LOG IN</title>
-    <style> <%@include file="styles/style.css" %> </style>
+    <style> <%@include file="/resources/css/style.css" %> </style>
 
 </head>
 <body onload='document.loginForm.username.focus();'>
