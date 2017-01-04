@@ -5,58 +5,107 @@
 <head>
     <title>ADAUGA CARTE</title>
     <style> <%@include file="../../resources/css/style.css" %> </style>
+    <style> <%@include file="/resources/css/normalize.css" %> </style>
+    <style> <%@include file="/resources/css/font-awesome.min.css" %> </style>
+    <style> <%@include file="/resources/css/set2.css" %> </style>
 
 </head>
 <body>
-<div id="logo">
-    <a href="<c:url value="/"/>"><img src="/images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
-</div>
-<div id="titluAdaugaCarte">
-    <label id="autentificare">
-        <br/>
-        ADAUGA CARTE
-    </label>
-</div>
-<hr/>
-<form name='addBookForm'
-      action="<c:url value='/add-book' />" method='POST'>
-    <div id="fields">
-        <div id="inputs">
-            <label id="titlu" style="float:left; font-size:20px">TITLU:</label>
-            <input id="titluCarte" type="text" name="bookTitle"/>
-            <br/><br/>
+<div id="frame">
+    <center>
+        <img src="/images/logo.png" style="width:150px;height:150px;float:left;margin-top:5%;margin-bottom:5%; margin-left:37.5%;"/>
+    </center>
+    <hr/>
+    <div id="content">
 
-            <label id="url" style="float:left; font-size:20px">URL COPERTA:</label>
-            <input id="urlCoperta" type="text" name="bookCoverUrl"/>
-            <br/><br/>
+        <form name='addBookForm'
+              action="<c:url value='/add_book' />" method='POST'>
 
-            <label id="autor" style="float:left; font-size:20px">AUTOR:</label>
-            <input id="autorCarte" type="text" name="bookAuthor"/>
-            <br/><br/>
+            <div id="fields">
 
-            <label id="editura" style="float:left; font-size:20px">EDITURA:</label>
-            <input id="edituraCarte" type="text" name="bookPublisher"/>
-            <br/><br/>
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="titluCarte" name="bookTitle"/>
+					<label class="input__label input__label--nao" for="titluCarte">
+						<span class="input__label-content input__label-content--nao">Titlu</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
 
-            <label id="limba" style="float:left; font-size:20px">LIMBA:</label>
-            <input id="limbaCarte" type="text" name="bookLanguage"/>
-            <br/><br/>
+                <br/>
 
-            <label id="categorii" style="float:left; font-size:20px">CATEGORII<br />(separate prin virgula):</label>
-            <input id="categoriiCarte" type="text" name="bookCateg"/>
-            <br/><br/>
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="urlCoperta" name="bookCoverUrl"/>
+					<label class="input__label input__label--nao" for="urlCoperta">
+						<span class="input__label-content input__label-content--nao">URL Coperta</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
 
-            <br/><br/>
-        </div>
+                <br/>
+
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="autorCarte" name="bookAuthor"/>
+					<label class="input__label input__label--nao" for="autorCarte">
+						<span class="input__label-content input__label-content--nao">Autor</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
+
+                <br/>
+
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="edituraCarte" name="bookPublisher"/>
+					<label class="input__label input__label--nao" for="edituraCarte">
+						<span class="input__label-content input__label-content--nao">Editura</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
+
+                <br/>
+
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="limbaCarte" name="bookLanguage"/>
+					<label class="input__label input__label--nao" for="limbaCarte">
+						<span class="input__label-content input__label-content--nao">Limba</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
+
+                <br/>
+
+                <span class="input input--nao">
+					<input class="input__field input__field--nao" type="text" id="categoriiCarte" name="bookCateg"/>
+					<label class="input__label input__label--nao" for="categoriiCarte">
+						<span class="input__label-content input__label-content--nao">Categorii(separate prin virgula)</span>
+					</label>
+					<svg class="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+						<path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+					</svg>
+				</span>
+
+                <br/>
+
+
+            </div>
+            <div id="submit">
+                <button type="submit" class="buttonLogIn" id="butonAddCarte">Adauga cartea!</button>
+            </div>
+        </form>
     </div>
-    <div id="submit">
-        <button type="submit" id="butonAddCarte">Adauga cartea!</button>
-    </div>
-</form>
-
+    <br/>
 </div>
+<br/>
 </body>
 <footer>
 </footer>
 </html>
-

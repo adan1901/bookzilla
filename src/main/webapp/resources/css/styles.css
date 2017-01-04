@@ -243,7 +243,6 @@ hr {
 }
 
 #timer-line{
-    background-image: URL('/images/triangles.jpg');
 }
 
 #clockdiv{
@@ -811,4 +810,26 @@ hr {
     padding-top:30px;
     background-color: #f8f8f8;
     height:100%;
+}
+
+.buttonLogIn {
+    background-color:#c62d1f;
+    -moz-border-radius:12px;
+    -webkit-border-radius:12px;
+    border-radius:12px;
+    border:2px solid #d02718;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Trebuchet MS;
+    font-size:17px;
+    padding:10px 25px;
+    text-decoration:none;
+}
+.buttonLogIn:hover {
+    background-color:#f24437;
+}
+.buttonLogIn:active {
+    position:relative;
+    top:1px;
 }

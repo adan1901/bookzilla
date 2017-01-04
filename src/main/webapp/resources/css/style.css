@@ -17,11 +17,27 @@
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;
+    width: 75%;
 }
 
 body{
-    background-color:#267158;
+    background-image: URL('/images/biblioteca-autentificare.jpg');
 }
+
+#frame{
+    background-color: white;
+    margin-top: 3%;
+    margin-left: 30%;
+    margin-right:30%;
+}
+
+#content{
+    margin-top: 1%;
+}
+#greetings{
+    margin-left: 20%;
+}
+
 #titluAutentificare{
     height: 100px;
     margin-left: 37%;
@@ -44,10 +60,10 @@ body{
 }
 
 #fields{
-    width: 30%;
-    margin-left: 35%;
-    margin-right:35%;
+    width: 75%;
+    margin-left: 20%;
     margin-top: 4%;
+    background-color: white;
 }
 
 h3 {
@@ -56,32 +72,33 @@ h3 {
     float: left;
 }
 
-input {
-    width: 300px;
-    float: right;
-}
 
 hr {
-    width: 50%;
+    width: 75%;
+}
+h1{
+    font-family:"Yu Mincho Light";
+    font-size: 25px;
 }
 
+h2{
+    margin-top:-4%;
+    font-family:"Yu Mincho Light";
+    font-size: 20px;
+}
 #submit {
     width: 24%;
     margin-left: 38%;
     margin-right:38%;
 }
 
-#butonSubmit{
-    width:100%;
-    margin-top:1%;
-    height: 50px;
-    background-color: #003725;
-    border-color: #003725;
-    cursor: pointer;
-    font-family: "Arial Black";
-    font-size: 15px;
-    color: #4c8e79;
+#welcome{
+    font-family:"Yu Mincho Light";
+    font-size: 20px;
+    margin-left: 15%;
 }
+
+
 
 #butonAddCarte{
     width:100%;
@@ -97,4 +114,35 @@ hr {
 
 a{
     color: white;
+    font-family:"Yu Mincho Light";
+    font-size: 20px;
 }
+
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.buttonLogIn {
+    background-color:#c62d1f;
+    -moz-border-radius:12px;
+    -webkit-border-radius:12px;
+    border-radius:12px;
+    border:2px solid #d02718;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Trebuchet MS;
+    font-size:17px;
+    padding:10px 25px;
+    text-decoration:none;
+}
+.buttonLogIn:hover {
+    background-color:#f24437;
+}
+.buttonLogIn:active {
+    position:relative;
+    top:1px;
+}
+
+
