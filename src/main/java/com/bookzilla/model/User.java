@@ -1,16 +1,18 @@
 package com.bookzilla.model;
 
 import javax.jws.soap.SOAPBinding;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by adinu on 12/4/16.
  */
+@Entity
+@Table(name = "bz_user")
 public class User {
 
-    public static int SEQUENCE_NUM = 0;
-
-    private int id;
+    private Long id;
 
     private double rank;
 
@@ -26,41 +28,22 @@ public class User {
 
     private String location;
 
+    private Set<Role> roles;
+
+    private Set<Book> booksOwned;
+
+    private Set<Book> booksRented;
+
     public User() {
-        super();
-        this.id = ++User.SEQUENCE_NUM;
     }
 
-    public User(double rank, String firstName, String lastName, String username, String password,
-                String email, String location) {
-
-        super();
-        this.rank = 0;
-        this.id = ++SEQUENCE_NUM;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.location = location;
-    }
-
-    public User(int id, String username, String email, String firstName, String lastName,
-                String password) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-    }
-
-    public int getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -120,11 +103,39 @@ public class User {
         this.location = location;
     }
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "bz_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @OneToMany(mappedBy = "ownerUser", fetch = FetchType.EAGER)
+    public Set<Book> getBooksOwned() {
+        return booksOwned;
+    }
+
+    public void setBooksOwned(Set<Book> booksOwned) {
+        this.booksOwned = booksOwned;
+    }
+
+    @OneToMany(mappedBy = "renterUser", fetch = FetchType.EAGER)
+    public Set<Book> getBooksRented() {
+        return booksRented;
+    }
+
+    public void setBooksRented(Set<Book> booksRented) {
+        this.booksRented = booksRented;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 100001;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + id.intValue();
 
         return result;
     }

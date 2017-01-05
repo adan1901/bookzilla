@@ -2,6 +2,7 @@ package com.bookzilla.dao;
 
 import com.bookzilla.book.BookService;
 import com.bookzilla.model.Book;
+import com.bookzilla.repository.BookRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,12 @@ public class BookDao implements BaseDao {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    BookRepository bookRepository;
+
     @Override
     public boolean saveObject(Object object) {
+
         Book book = null;
         if (object instanceof Book) {
             book = (Book) object;
@@ -35,27 +40,15 @@ public class BookDao implements BaseDao {
 
     private boolean save(Book book) {
 
-        File file = new File("books//" + book.getId() + "//" + book.getCategory()+ "//" +
-                book.getLocation()+ "//" + book.getAuthor() + "//" + book.getPublisher() + "//" +
-                book.getTitle() + "//" + book.getLanguage() + "//" + book.getOwnerId() + "//" +
-                book.getRenterId() + "//" + book.getUrlLocation());
+        try {
 
-        logger.debug("Writing to disk file ierarchy: " + file.getName());
-        if (!file.getParentFile().exists()){
-            file.getParentFile().mkdirs();
-        }
-        try{
-            FileWriter writer = new FileWriter(file);
-            writer.write(book.getDescription());
-            writer.close();
+            bookRepository.save(book);
 
-            bookService.saveSequenceNum(book.getId());
+            return true;
 
-        } catch(IOException e){
-            logger.debug(e);
+        } catch (Exception e) {
+            logger.error(e);
             return false;
         }
-
-        return true;
     }
 }

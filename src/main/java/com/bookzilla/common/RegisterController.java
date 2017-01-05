@@ -56,8 +56,13 @@ public class RegisterController {
 
         logger.debug("Proceed with request of adding a new user");
 
-        User.SEQUENCE_NUM = userService.getNextSequenceNum() - 1;
-        User user = new User(0, firstName, lastName, username, password, emailAddress, null);
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(emailAddress);
+        user.setLocation("Bucuresti");
 
         try {
             userService.addUser(user);

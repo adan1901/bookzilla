@@ -1,17 +1,16 @@
 package com.bookzilla.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
 /**
  * Created by adinu on 12/4/16.
  */
+@Entity
+@Table(name = "bz_book")
 public class Book {
 
-    public static int SEQUENCE_NUM = 0;
-
-    private int id;
-
-    private int ownerId;
-
-    private int renterId;
+    private Long id;
 
     private double rank;
 
@@ -21,78 +20,33 @@ public class Book {
 
     private String publisher;
 
-    private String category;
-
     private String language;
 
     private String description;
 
     private String location;
 
-    private String urlLocation;
+    private String url;
+
+    private User ownerUser;
+
+    private User renterUser;
+
+    private Set<Category> categories;
 
     public Book() {
 
         super();
-        this.id = Book.SEQUENCE_NUM++;
     }
 
-    public Book(String category, String location, String author, String publisher,
-                String title, String language, int ownerId, int renderId, String urlLocation,
-                String description, int rank) {
-
-        System.out.println("Hello from first constructor of Book");
-        this.id = ++Book.SEQUENCE_NUM;
-        this.category = category;
-        this.location = location;
-        this.author = author;
-        this.publisher = publisher;
-        this.title = title;
-        this.language = language;
-        this.ownerId = ownerId;
-        this.renterId = renderId;
-        this.urlLocation = urlLocation;
-        this.description = description;
-        this.rank = rank;
-    }
-
-    public Book(int id, String category, String location, String author, String publisher,
-                String title, String language, int ownerId, int renderId, String urlLocation, String description) {
-        this.id = id;
-        this.ownerId = ownerId;
-        this.renterId = renterId;
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.category = category;
-        this.language = language;
-        this.location = location;
-        this.description = description;
-        this.urlLocation = urlLocation;
-    }
-
-    public int getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public int getRenterId() {
-        return renterId;
-    }
-
-    public void setRenterId(int renterId) {
-        this.renterId = renterId;
     }
 
     public double getRank() {
@@ -127,14 +81,6 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -155,19 +101,53 @@ public class Book {
         this.location = location;
     }
 
-    public String getUrlLocation() {
-        return urlLocation;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUrlLocation(String urlLocation) {
-        this.urlLocation = urlLocation;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "bz_user_books_owned",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "book_id"))
+    public User getOwnerUser() {
+        return ownerUser;
+    }
+
+    public void setOwnerUser(User ownerUser) {
+        this.ownerUser = ownerUser;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "bz_user_books_rented",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "book_id"))
+    public User getRenterUser() {
+        return renterUser;
+    }
+
+    public void setRenterUser(User renterUser) {
+        this.renterUser = renterUser;
+    }
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
 
     @Override
     public int hashCode() {
         final int prime = 100007;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + id.intValue();
 
         return result;
     }
@@ -189,7 +169,7 @@ public class Book {
     @Override
     public String toString() {
         return String.format(
-                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, category=%s, language=%s, location=%s, description=%s, urlLocation=%s]",
-                id, rank, title, author, publisher, category, language, location, description, urlLocation);
+                "Book [id=%s, rank=%s, title=%s, author=%s, publisher=%s, language=%s, location=%s, description=%s, url=%s]",
+                id, rank, title, author, publisher, language, location, description, url);
     }
 }

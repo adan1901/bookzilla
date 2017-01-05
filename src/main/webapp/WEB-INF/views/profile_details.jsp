@@ -45,7 +45,7 @@
                 <br />
                 <c:forEach items="${bookCollection}" var="book">
                     <a href="/book-details/${book.id}">
-                        <img src="${book.urlLocation}" style="margin-left:10px;width:180px;height:200px;float:left;margin-top:10px;" />
+                        <img src="${book.url}" style="margin-left:10px;width:180px;height:200px;float:left;margin-top:10px;" />
                     </a>
                 </c:forEach>
 

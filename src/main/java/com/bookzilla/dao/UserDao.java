@@ -1,6 +1,8 @@
 package com.bookzilla.dao;
 
 import com.bookzilla.model.User;
+import com.bookzilla.repository.RoleRepository;
+import com.bookzilla.repository.UserRepository;
 import com.bookzilla.user.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 
 import static com.bookzilla.utils.PasswordEncryptor.decode;
 
@@ -22,7 +25,10 @@ public class UserDao implements BaseDao {
     private static final Logger logger = Logger.getLogger(UserDao.class);
 
     @Autowired
-    UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public boolean saveObject(Object object) {
@@ -39,22 +45,15 @@ public class UserDao implements BaseDao {
 
     private boolean save(User user) {
 
-        try{
-            File file = new File("users//" + user.getId() + "//" + user.getUsername() + "//" +
-                    user.getEmail() + "//" + user.getFirstName() + "//" + user.getLastName());
-            if (!file.getParentFile().exists()) { file.getParentFile().mkdirs(); }
-            if (file.exists()) { return true; }
+        try {
+            user.setRoles(new HashSet<>(roleRepository.findAll()));
+            userRepository.save(user);
 
-            PrintWriter writer = new PrintWriter(file, "UTF-8");
-            writer.println(user.getPassword());
-            writer.close();
-
-            userService.saveSequenceNum(user.getId());
-
-        } catch (IOException e){
+            return true;
+        } catch (Exception e) {
             logger.error(e);
             return false;
         }
-        return true;
+
     }
 }

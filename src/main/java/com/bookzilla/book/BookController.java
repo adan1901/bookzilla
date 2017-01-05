@@ -1,8 +1,10 @@
 package com.bookzilla.book;
 
 import com.bookzilla.model.Book;
+import com.bookzilla.model.Category;
 import com.bookzilla.model.User;
 import com.bookzilla.security.SecurityService;
+import com.bookzilla.service.CategoryService;
 import com.bookzilla.user.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,6 +37,9 @@ public class BookController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @RequestMapping(value = "/add-book", method = RequestMethod.GET)
     public String addBook() {
 
@@ -50,18 +57,27 @@ public class BookController {
         logger.debug("Proceed with request of adding a new book");
 
         String username = securityService.findLoggedInUserName();
-        User user = userService.findUserByUsername(username);
+        User currentUser = userService.findUserByUsername(username);
 
-        String urlLocation = bookService.escapeBuggySymbols(bookCoverUrl);
-        Book.SEQUENCE_NUM = bookService.getNextSequenceNum() - 1;
-
-        Book book = new Book(bookCateg, "Bucuresti", bookAuthor, bookPublisher, bookTitle,
-                bookLanguage, user.getId(), -1, urlLocation, "no description", 0);
-
+        Book book = new Book();
+        book.setTitle(bookTitle);
+        book.setUrl(bookCoverUrl);
+        book.setAuthor(bookAuthor);
+        book.setPublisher(bookPublisher);
+        book.setLanguage(bookLanguage);
+        book.setOwnerUser(currentUser);
         logger.debug("Created book with following details: " + book);
 
+        // modify this to use a collection of categories
+        Category category = new Category();
+        category.setName(bookCateg);
+        category.setBook(book);
+
         try {
+
             bookService.registerBook(book);
+
+            categoryService.registerCategory(category);
         } catch (Exception e) {
             logger.error(e);
         }
@@ -76,20 +92,20 @@ public class BookController {
 
         /* Take current user details */
         String username = securityService.findLoggedInUserName();
-        User currUser = userService.findUserByUsername(username);
+        User currentUser = userService.findUserByUsername(username);
 
-        mv.addObject("firstName", currUser.getFirstName());
-        mv.addObject("lastName", currUser.getLastName());
+        mv.addObject("firstName", currentUser.getFirstName());
+        mv.addObject("lastName", currentUser.getLastName());
 
         /* Take current book details */
-        Book userBook = bookService.getBookWithId(Integer.parseInt(bookId));
+        Book userBook = bookService.findBookById(Long.parseLong(bookId));
 
         if (userBook != null) {
             mv.addObject("bookTitle", userBook.getTitle());
             mv.addObject("bookAuthor", userBook.getAuthor());
             mv.addObject("bookPublisher", userBook.getPublisher());
-            mv.addObject("bookCategory", userBook.getCategory());
-            mv.addObject("bookImgUrl", userBook.getUrlLocation());
+            mv.addObject("bookCategory", userBook.getCategories());
+            mv.addObject("bookImgUrl", userBook.getUrl());
 
             /* Try to see who is having this book */
             List<User> usersHavingTheBook = new ArrayList<>();

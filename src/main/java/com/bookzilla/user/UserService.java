@@ -16,8 +16,6 @@ public abstract class UserService {
 
     public void addUser(User user) throws Exception {};
 
-    private void seekPath(ArrayList<String> till_now, ArrayList<String> to_seek, ArrayList<User> ret, File dir){}
-
     public User findUserByUsername(String username) {
         return null;
     }
@@ -25,9 +23,5 @@ public abstract class UserService {
     public List<User> listAllUsers() {
         return new ArrayList<>();
     }
-
-    public int getNextSequenceNum() { return 0; };
-
-    public void saveSequenceNum(int sequence_num) {};
 
 }

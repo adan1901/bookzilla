@@ -410,7 +410,7 @@
             <c:forEach items="${allBooks}" var="book">
                 <a href="<c:url value="/book-details/${book.id}" />">
                     <div class="col-md-2">
-                        <img src="<c:url value="${book.urlLocation}" /> " id="recImg"/>
+                        <img src="<c:url value="${book.url}" /> " id="recImg"/>
                     </div>
                 </a>
             </c:forEach>
@@ -418,7 +418,7 @@
             <c:forEach items="${matchedBooks}" var="matchedBook">
                 <a href="<c:url value="/book-details/${matchedBook.id}" />">
                     <div class="col-md-2">
-                        <img src="<c:url value="${matchedBook.urlLocation}" /> " id="recImg"/>
+                        <img src="<c:url value="${matchedBook.url}" /> " id="recImg"/>
                     </div>
                 </a>
             </c:forEach>
