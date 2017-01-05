@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="logo">
-    <a href="index.html"><img src="img/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
+    <a href="index.html"><img src="images/logo.png" style="width:50px;height:50px;float:left;margin-left:15%;margin-top:50px;"/></a>
 </div>
 <div id="labelUser">
     <label id="user">Nume Prenume</label>
