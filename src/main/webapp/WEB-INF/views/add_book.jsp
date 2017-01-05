@@ -19,7 +19,7 @@
     <div id="content">
 
         <form name='addBookForm'
-              action="<c:url value='/add_book' />" method='POST'>
+              action="<c:url value='/add-book' />" method='POST'>
 
             <div id="fields">
 
