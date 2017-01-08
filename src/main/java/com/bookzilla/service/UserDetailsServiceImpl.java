@@ -1,8 +1,9 @@
-package com.bookzilla.user;
+package com.bookzilla.service;
 
 import com.bookzilla.model.Role;
 import com.bookzilla.model.User;
 import com.bookzilla.repository.UserRepository;
+import com.bookzilla.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                 user.getPassword(), grantedAuthorities);
 
-//        User user = userService.findUserByUsername(username);
+//        User user = userService.findByUsername(username);
 //
 //        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 //        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));

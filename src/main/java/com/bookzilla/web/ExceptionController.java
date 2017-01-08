@@ -1,4 +1,4 @@
-package com.bookzilla.common;
+package com.bookzilla.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

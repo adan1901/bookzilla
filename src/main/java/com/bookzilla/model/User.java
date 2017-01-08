@@ -24,6 +24,8 @@ public class User {
 
     private String password;
 
+    private String passwordConfirm;
+
     private String email;
 
     private String location;
@@ -86,6 +88,16 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Transient
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
 
     public String getEmail() {
         return email;

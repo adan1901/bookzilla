@@ -1,11 +1,12 @@
-package com.bookzilla.book;
+package com.bookzilla.web;
 
 import com.bookzilla.model.Book;
 import com.bookzilla.model.Category;
 import com.bookzilla.model.User;
-import com.bookzilla.security.SecurityService;
+import com.bookzilla.service.SecurityService;
+import com.bookzilla.service.BookService;
 import com.bookzilla.service.CategoryService;
-import com.bookzilla.user.UserService;
+import com.bookzilla.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -57,7 +56,7 @@ public class BookController {
         logger.debug("Proceed with request of adding a new book");
 
         String username = securityService.findLoggedInUserName();
-        User currentUser = userService.findUserByUsername(username);
+        User currentUser = userService.findByUsername(username);
 
         Book book = new Book();
         book.setTitle(bookTitle);
@@ -92,7 +91,7 @@ public class BookController {
 
         /* Take current user details */
         String username = securityService.findLoggedInUserName();
-        User currentUser = userService.findUserByUsername(username);
+        User currentUser = userService.findByUsername(username);
 
         mv.addObject("firstName", currentUser.getFirstName());
         mv.addObject("lastName", currentUser.getLastName());

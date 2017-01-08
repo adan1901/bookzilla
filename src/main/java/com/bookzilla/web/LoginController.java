@@ -1,17 +1,10 @@
-package com.bookzilla.common;
+package com.bookzilla.web;
 
-import com.bookzilla.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.bookzilla.user.UserServiceImpl;
-import com.bookzilla.dao.*;
-import com.bookzilla.model.*;
-import com.bookzilla.book.*;
-
-import java.util.List;
 
 /**
  * Created by adinu on 12/3/16.

@@ -3,18 +3,11 @@ package com.bookzilla.dao;
 import com.bookzilla.model.User;
 import com.bookzilla.repository.RoleRepository;
 import com.bookzilla.repository.UserRepository;
-import com.bookzilla.user.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashSet;
-
-import static com.bookzilla.utils.PasswordEncryptor.decode;
 
 /**
  * Created by adinu on 12/4/16.

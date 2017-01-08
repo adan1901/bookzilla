@@ -1,4 +1,4 @@
-package com.bookzilla.security;
+package com.bookzilla.service;
 
 import com.bookzilla.model.User;
 import org.springframework.security.core.Authentication;

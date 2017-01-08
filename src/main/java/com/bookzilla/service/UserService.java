@@ -1,4 +1,4 @@
-package com.bookzilla.user;
+package com.bookzilla.service;
 
 import com.bookzilla.dao.UserDao;
 import com.bookzilla.model.User;
@@ -16,7 +16,7 @@ public abstract class UserService {
 
     public void addUser(User user) throws Exception {};
 
-    public User findUserByUsername(String username) {
+    public User findByUsername(String username) {
         return null;
     }
 

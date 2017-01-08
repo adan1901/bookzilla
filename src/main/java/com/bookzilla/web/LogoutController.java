@@ -1,4 +1,4 @@
-package com.bookzilla.common;
+package com.bookzilla.web;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;

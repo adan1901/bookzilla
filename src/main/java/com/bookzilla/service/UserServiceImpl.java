@@ -1,17 +1,15 @@
-package com.bookzilla.user;
+package com.bookzilla.service;
 
 import com.bookzilla.dao.UserDao;
 import com.bookzilla.model.User;
 import com.bookzilla.repository.UserRepository;
-import org.apache.commons.logging.Log;
+import com.bookzilla.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import javax.inject.Inject;
+import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -37,7 +35,7 @@ public class UserServiceImpl extends UserService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public User findByUsername(String username) {
 
         try {
             return userRepository.findByUsername(username);

@@ -2,7 +2,7 @@ package com.bookzilla.security;
 
 
 import com.bookzilla.model.User;
-import com.bookzilla.user.UserService;
+import com.bookzilla.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -1,9 +1,10 @@
-package com.bookzilla.user;
+package com.bookzilla.web;
 
-import com.bookzilla.book.BookService;
+import com.bookzilla.service.BookService;
 import com.bookzilla.model.Book;
 import com.bookzilla.model.User;
-import com.bookzilla.security.SecurityService;
+import com.bookzilla.service.SecurityService;
+import com.bookzilla.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,13 +39,13 @@ public class UserDetailsController {
         ModelAndView mv = new ModelAndView("profile_details");
 
         String loggedInUserName = securityService.findLoggedInUserName();
-        User loggedInUser = userService.findUserByUsername(loggedInUserName);
+        User loggedInUser = userService.findByUsername(loggedInUserName);
 
         boolean userIsPriviliged = true;
 
         User user = loggedInUser;
         if (username != null) {
-            user = userService.findUserByUsername(username);
+            user = userService.findByUsername(username);
 
             if (!user.equals(loggedInUser)) {
                 userIsPriviliged = false;

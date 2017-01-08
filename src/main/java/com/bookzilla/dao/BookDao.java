@@ -1,15 +1,11 @@
 package com.bookzilla.dao;
 
-import com.bookzilla.book.BookService;
+import com.bookzilla.service.BookService;
 import com.bookzilla.model.Book;
 import com.bookzilla.repository.BookRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Created by adinu on 12/4/16.

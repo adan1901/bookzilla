@@ -22,6 +22,6 @@
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="userDetailsServiceImpl" class="com.bookzilla.user.UserDetailsServiceImpl"></beans:bean>
+    <beans:bean id="userDetailsServiceImpl" class="com.bookzilla.service.UserDetailsServiceImpl"></beans:bean>
 
 </beans:beans>

@@ -1,4 +1,4 @@
-package com.bookzilla.library;
+package com.bookzilla.service;
 
 /**
  * Created by adinu on 12/4/16.

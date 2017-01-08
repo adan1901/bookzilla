@@ -1,4 +1,4 @@
-package com.bookzilla.book;
+package com.bookzilla.service;
 
 import com.bookzilla.dao.BookDao;
 import com.bookzilla.model.Book;
@@ -8,9 +8,8 @@ import com.bookzilla.repository.UserRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.io.*;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package com.bookzilla.library;
+package com.bookzilla.web;
 
-import com.bookzilla.book.BookService;
+import com.bookzilla.service.BookService;
 import com.bookzilla.model.Book;
 import com.bookzilla.model.User;
-import com.bookzilla.security.SecurityService;
-import com.bookzilla.user.UserService;
+import com.bookzilla.service.SecurityService;
+import com.bookzilla.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +37,7 @@ public class LibraryController {
         ModelAndView mv = new ModelAndView("library");
 
         String username = securityService.findLoggedInUserName();
-        User user = userService.findUserByUsername(username);
+        User user = userService.findByUsername(username);
 
         mv.addObject("firstname", user.getFirstName());
         mv.addObject("lastname", user.getLastName());
@@ -58,7 +58,7 @@ public class LibraryController {
         ModelAndView mv = new ModelAndView("library");
 
         String username = securityService.findLoggedInUserName();
-        User user = userService.findUserByUsername(username);
+        User user = userService.findByUsername(username);
 
         mv.addObject("firstname", user.getFirstName());
         mv.addObject("lastname", user.getLastName());

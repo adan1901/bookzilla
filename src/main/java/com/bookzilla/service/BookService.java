@@ -1,4 +1,4 @@
-package com.bookzilla.book;
+package com.bookzilla.service;
 
 import com.bookzilla.model.Book;
 import com.bookzilla.model.User;
