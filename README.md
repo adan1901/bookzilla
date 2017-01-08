@@ -12,3 +12,5 @@ Bookzilla struggles to become a great **Book Renting System**.
   - Set env variables and update env path
 - Create new **Run Configuration** in *IntelliJ IDEA* to point to the Tomcat installation folder
   - Be sure to have configured **http://localhost:8080/** as a launch url, and to have that bookzilla artifact set in the *Before launch* section
+- Download and Install [MySql](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-14-04)
+- Use [Mysql Client](https://www.tutorialspoint.com/mysql/mysql-administration.htm) to create and configure the db, the user and to set privileges accordingly.
